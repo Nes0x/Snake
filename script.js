@@ -1,5 +1,5 @@
 window.onload = () => {
-    let snake = new Snake();
+    const snake = new Snake();
     snake.startGame();
 }
 
