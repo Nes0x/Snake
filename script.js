@@ -16,11 +16,18 @@ class Snake {
     };
     points = 0;
 
+    numberMobile = (event) => {
+        event.target.value = event.target.value.replace(/[^\d]/g,'');
+        this.keyDown(event.target.value);
+        return false;
+    }
+
     constructor() {
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
         this.pointsSpan = document.getElementById("points");
         document.addEventListener("keydown", this.keyDown);
+        document.addEventListener("keyup", this.numerMobile);
     }
 
     keyDown = (event) => {
