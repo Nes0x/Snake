@@ -1,7 +1,6 @@
 window.onload = () => {
     let snake = new Snake();
     snake.startGame();
-
 }
 
 class Snake {
@@ -46,7 +45,6 @@ class Snake {
                 this.deltaY = this.wallSize;
                 break;
         }
-
     }
 
     getRandomNumber = (maxNumber) => {
@@ -56,7 +54,6 @@ class Snake {
     clearMap = () => {
         this.context.fillStyle = "black";
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-
     }
 
     drawSnake = () => {
@@ -105,7 +102,7 @@ class Snake {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
                 this.restartGame();
             }
-        })
+        });
     }
 
     randomFood = () => {
@@ -128,7 +125,6 @@ class Snake {
     setPoints = () => {
         this.pointsSpan.textContent = this.points;
     }
-
 
     startGame = () => {
         this.restartGame();
