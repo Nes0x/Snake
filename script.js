@@ -93,6 +93,7 @@ class Snake {
 
     restartGame = () => {
         this.points = 0;
+        this.setPoints();
         this.randomFood();
         this.snake = [];
         this.makeSnake(5);
@@ -102,7 +103,8 @@ class Snake {
 
     foodCollision = () => {
         if (this.food.x === this.snake[0].x - 1 && this.food.y === this.snake[0].y - 1) {
-            this.points++;
+            this.points++; 
+            this.setPoints();
             this.successSound.play();
             this.snake.push(Object.assign({}, this.snake[this.snake.length - 1]));
             this.randomFood();
@@ -150,7 +152,6 @@ class Snake {
             }
             this.drawFood();
             this.drawSnake();
-            this.setPoints();
         }, 100);
     }
 }
