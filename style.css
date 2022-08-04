@@ -10,3 +10,7 @@ canvas {
     margin: auto;
     border: 5px #ffffff groove;
 }
+
+button {
+    margin-top: 20px;
+}

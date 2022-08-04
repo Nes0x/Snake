@@ -1,6 +1,7 @@
 window.onload = () => {
-    const snake = new Snake();
+    let snake = new Snake();
     snake.startGame();
+
 }
 
 class Snake {
@@ -16,14 +17,29 @@ class Snake {
     points = 0;
 
     constructor() {
+        this.errorSound = new Audio("error.mp3");
+        this.successSound = new Audio("success.mp3");
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
         this.pointsSpan = document.getElementById("points");
+        document.querySelectorAll("button").forEach(button => {
+            button.addEventListener("click", this.buttonClick);
+        })
         document.addEventListener("keydown", this.keyDown);
+    }
+
+    buttonClick = (event) => {
+        event.keyCode = Number(event.target.id);
+        this.keyDown(event);
     }
 
     keyDown = (event) => {
         switch (event.keyCode) {
+            case 39: //right
+            case 68:
+                this.deltaX = this.wallSize;
+                this.deltaY = 0;
+                break;
             case 37: //left
             case 65:
                 this.deltaX = -this.wallSize;
@@ -33,11 +49,6 @@ class Snake {
             case 87:
                 this.deltaX = 0;
                 this.deltaY = -this.wallSize;
-                break;
-            case 39: //right
-            case 68:
-                this.deltaX = this.wallSize;
-                this.deltaY = 0;
                 break;
             case 40: //down
             case 83:
@@ -92,6 +103,7 @@ class Snake {
     foodCollision = () => {
         if (this.food.x === this.snake[0].x - 1 && this.food.y === this.snake[0].y - 1) {
             this.points++;
+            this.successSound.play();
             this.snake.push(Object.assign({}, this.snake[this.snake.length - 1]));
             this.randomFood();
         }
@@ -100,6 +112,7 @@ class Snake {
     wallCollision = () => {
         this.snake.forEach(value => {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
+                this.errorSound.play();
                 this.restartGame();
             }
         });
