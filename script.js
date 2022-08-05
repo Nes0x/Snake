@@ -108,12 +108,6 @@ class Snake {
         this.makeSnake(5);
         this.deltaX = 0;
         this.deltaY = 0;
-        this.lastScore = this.score;
-        this.lastScoreSpan.textContent = this.lastScore; 
-        if (this.topScore < this.score) { 
-            this.topScore = this.score; 
-            this.topScoreSpan.textContent = this.topScore;
-        }
     }
 
     foodCollision = () => {
@@ -139,6 +133,12 @@ class Snake {
     wallCollision = () => {
         this.snake.forEach(value => {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
+                this.lastScore = this.score;
+                this.lastScoreSpan.textContent = this.lastScore; 
+                if (this.topScore < this.score) { 
+                    this.topScore = this.score; 
+                    this.topScoreSpan.textContent = this.topScore;
+                }
                 this.restartGame();
             }
         });
