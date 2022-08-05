@@ -142,8 +142,16 @@ class Snake {
         ${this.getRandomNumber(255)},
         ${this.getRandomNumber(255)},
         ${this.getRandomNumber(255)})`;
-        this.food.x = randV(this.wallSize, this.canvas.width - this.wallSize);
-        this.food.y = randV(this.wallSize, this.canvas.height - this.wallSize);
+        let x = randV(this.wallSize, this.canvas.width - this.wallSize);
+        let y = randV(this.wallSize, this.canvas.height - this.wallSize);
+        this.snake.forEach(value => {
+            while (value.x === x && value.y == y) { 
+                x = randV(this.wallSize, this.canvas.width - this.wallSize);
+                y = randV(this.wallSize, this.canvas.height - this.wallSize);
+            } 
+        });
+        this.food.x = x;
+        this.food.y = y;
     }
 
     drawFood = () => {
