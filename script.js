@@ -1,5 +1,5 @@
 window.onload = () => {
-    let snake = new Snake();
+    const snake = new Snake();
     snake.startGame();
 }
 
@@ -110,6 +110,14 @@ class Snake {
         }
     }
 
+    snakeCollision = () => { 
+        this.snake.forEach((value, index) => {
+            if (value.x === this.snake[0] && value.y === this.snake[0]) { 
+                this.restartGame();
+            } 
+        });
+    } 
+
     wallCollision = () => {
         this.snake.forEach(value => {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
@@ -145,6 +153,7 @@ class Snake {
         setInterval(() => {
             this.clearMap();
             this.foodCollision();
+            this.snakeCollision();
             this.wallCollision();
             if (this.deltaX !== 0 || this.deltaY !== 0) {
                 this.moveSnake(this.deltaX, this.deltaY);
