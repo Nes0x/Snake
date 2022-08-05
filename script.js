@@ -96,6 +96,9 @@ class Snake {
     }
 
     restartGame = () => {
+        if (deltaX !== 0 && deltaY !== 0) { 
+            this.errorSound.play();
+        } 
         this.score = 0;
         this.setScore();
         this.randomFood();
@@ -119,7 +122,6 @@ class Snake {
         this.snake.forEach((value, index) => {
             if (index !== 0) {
                 if (value.x === this.snake[0].x && value.y === this.snake[0].y) { 
-                    this.errorSound.play();
                     this.restartGame();
                 } 
             }
@@ -129,7 +131,6 @@ class Snake {
     wallCollision = () => {
         this.snake.forEach(value => {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
-                this.errorSound.play();
                 this.restartGame();
             }
         });
