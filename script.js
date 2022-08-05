@@ -13,14 +13,14 @@ class Snake {
         y: 0,
         color: "white"
     };
-    points = 0;
+    score = 0;
 
     constructor() {
         this.errorSound = new Audio("./sounds/error.mp3");
         this.successSound = new Audio("./sounds/success.mp3");
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
-        this.pointsSpan = document.getElementById("points");
+        this.scoreSpan = document.getElementById("points");
         document.querySelectorAll("input").forEach(button => {
             button.addEventListener("click", this.buttonClick);
         });
@@ -91,8 +91,8 @@ class Snake {
     }
 
     restartGame = () => {
-        this.points = 0;
-        this.setPoints();
+        this.score = 0;
+        this.setScore();
         this.randomFood();
         this.snake = [];
         this.makeSnake(5);
@@ -102,8 +102,8 @@ class Snake {
 
     foodCollision = () => {
         if (this.food.x === this.snake[0].x - 1 && this.food.y === this.snake[0].y - 1) {
-            this.points++;
-            this.setPoints();
+            this.score++;
+            this.setScore();
             this.successSound.play();
             this.snake.push(Object.assign({}, this.snake[this.snake.length - 1]));
             this.randomFood();
@@ -136,8 +136,8 @@ class Snake {
         this.context.fillRect(this.food.x, this.food.y, this.wallSize, this.wallSize);
     }
 
-    setPoints = () => {
-        this.pointsSpan.textContent = this.points;
+    setScore = () => {
+        this.scoreSpan.textContent = this.score;
     }
 
     startGame = () => {
