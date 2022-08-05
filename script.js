@@ -96,9 +96,6 @@ class Snake {
     }
 
     restartGame = () => {
-        if (deltaX !== 0 && deltaY !== 0) { 
-            this.errorSound.play();
-        } 
         this.score = 0;
         this.setScore();
         this.randomFood();
