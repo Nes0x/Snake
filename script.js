@@ -112,7 +112,7 @@ class Snake {
         this.lastScoreSpan.textContent = this.lastScore; 
         if (this.topScore < this.score) { 
             this.topScore = this.score; 
-            this.topScoreSpan.textContent = this.score;
+            this.topScoreSpan.textContent = this.topScore;
         }
     }
 
