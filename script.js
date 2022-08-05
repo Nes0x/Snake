@@ -67,7 +67,7 @@ class Snake {
     }
 
     drawSnake = () => {
-        this.context.strokeStyle = "green";
+        this.context.strokeStyle = document.getElementById("snake-color").value;
         this.context.lineWidth = 2;
         this.context.lineJoin = "bevel"
         this.snake.forEach(value => {
