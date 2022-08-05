@@ -124,6 +124,7 @@ class Snake {
         this.snake.forEach((value, index) => {
             if (index !== 0) {
                 if (value.x === this.snake[0].x && value.y === this.snake[0].y) { 
+                    this.setRecords();
                     this.restartGame();
                 } 
             }
@@ -133,12 +134,7 @@ class Snake {
     wallCollision = () => {
         this.snake.forEach(value => {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
-                this.lastScore = this.score;
-                this.lastScoreSpan.textContent = this.lastScore; 
-                if (this.topScore < this.score) { 
-                    this.topScore = this.score; 
-                    this.topScoreSpan.textContent = this.topScore;
-                }
+                this.setRecords();
                 this.restartGame();
             }
         });
@@ -171,6 +167,15 @@ class Snake {
 
     setScore = () => {
         this.scoreSpan.textContent = this.score;
+    }
+
+    setRecords = () => { 
+        this.lastScore = this.score;
+        this.lastScoreSpan.textContent = this.lastScore; 
+        if (this.topScore < this.score) { 
+            this.topScore = this.score; 
+            this.topScoreSpan.textContent = this.topScore;
+        }
     }
 
     startGame = () => {
