@@ -1,5 +1,5 @@
-const snake = new Snake();
 window.onload = () => {
+    const snake = new Snake();
     snake.startGame();
 }
 
