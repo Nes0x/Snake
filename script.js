@@ -21,11 +21,15 @@ class Snake {
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
         this.pointsSpan = document.getElementById("points");
-        document.querySelectorAll("input").forEach(arrow => {
-            arrow.keyCode = Number(arrow.target.id);
-            this.keyDown(arrow);
+        document.querySelectorAll("input").forEach(button => {
+            button.addEventListener("click", this.buttonClick);
         });
         document.addEventListener("keydown", this.keyDown);
+    }
+
+    buttonClick = (event) => {
+        event.keyCode = Number(event.target.id);
+        this.keyDown(event);
     }
 
     keyDown = (event) => {
