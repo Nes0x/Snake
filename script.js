@@ -106,7 +106,7 @@ class Snake {
     }
 
     foodCollision = () => {
-        if (this.food.x === this.snake[0].x - 1 && this.food.y === this.snake[0].y - 1) {
+        if (this.food.x === this.snake[0].x && this.food.y === this.snake[0].y) {
             this.score++;
             this.setScore();
             this.successSound.play();
