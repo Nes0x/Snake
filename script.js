@@ -68,9 +68,14 @@ class Snake {
 
     drawSnake = () => {
         this.context.strokeStyle = document.getElementById("snake-color").value;
-        this.context.lineWidth = 2;
         this.context.lineJoin = "bevel"
-        this.snake.forEach(value => {
+        this.snake.forEach((value, index) => {
+            if (index === 0) {
+                this.context.lineWidth = 6; 
+                this.context.strokeRect(value.x, value.y, this.wallSize, this.wallSize);
+                return;
+            } 
+            this.context.lineWidth = 2;
             this.context.strokeRect(value.x, value.y, this.wallSize, this.wallSize);
         });
     }
