@@ -100,7 +100,7 @@ class Snake {
         this.setScore();
         this.randomFood();
         this.snake = [];
-        this.makeSnake(1);
+        this.makeSnake(5);
         this.deltaX = 0;
         this.deltaY = 0;
     }
