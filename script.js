@@ -112,9 +112,11 @@ class Snake {
 
     snakeCollision = () => { 
         this.snake.forEach((value, index) => {
-            if (value.x === this.snake[0].x && value.y === this.snake[0].y) { 
-                this.restartGame();
-            } 
+            if (index !== 0) {
+                if (value.x === this.snake[0].x && value.y === this.snake[0].y) { 
+                    this.restartGame();
+                } 
+            }
         });
     } 
 
