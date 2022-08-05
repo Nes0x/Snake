@@ -20,7 +20,7 @@ class Snake {
         this.successSound = new Audio("./sounds/success.mp3");
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
-        this.scoreSpan = document.getElementById("points");
+        this.scoreSpan = document.getElementById("score");
         document.querySelectorAll("input").forEach(button => {
             button.addEventListener("click", this.buttonClick);
         });
@@ -119,6 +119,7 @@ class Snake {
         this.snake.forEach((value, index) => {
             if (index !== 0) {
                 if (value.x === this.snake[0].x && value.y === this.snake[0].y) { 
+                    this.errorSound.play();
                     this.restartGame();
                 } 
             }
