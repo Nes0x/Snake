@@ -14,6 +14,8 @@ class Snake {
         color: "white"
     };
     score = 0;
+    lastScore = 0;
+    topScore = 0;
 
     constructor() {
         this.errorSound = new Audio("./sounds/error.mp3");
@@ -21,6 +23,8 @@ class Snake {
         this.canvas = document.getElementById("canvas");
         this.context = this.canvas.getContext("2d");
         this.scoreSpan = document.getElementById("score");
+        this.topScoreSpan = document.getElementById("topScore");
+        this.lastScoreSpan = document.getElementById("lastScore");
         document.querySelectorAll("input").forEach(button => {
             button.addEventListener("click", this.buttonClick);
         });
@@ -104,6 +108,12 @@ class Snake {
         this.makeSnake(5);
         this.deltaX = 0;
         this.deltaY = 0;
+        this.lastScore = this.score;
+        this.lastScoreSpan.textContent = this.lastScore; 
+        if (this.topScore < this.score) { 
+            this.topScore = this.score; 
+            this.topScoreSpan.textContent = this.score;
+        }
     }
 
     foodCollision = () => {
