@@ -16,6 +16,7 @@ class Snake {
     lastScore = 0;
     topScore = 0;
     segment = 1;
+    segmentNumber = 0; 
 
     constructor() {
         this.errorSound = new Audio("./sounds/error.mp3");
@@ -110,13 +111,17 @@ class Snake {
         this.makeSnake(5);
         this.deltaX = 0;
         this.deltaY = 0;
+        this.segment = 1; 
+        this.segmentNumber = 0;
     }
 
     foodCollision = () => {
         if (this.food.x === this.snake[0].x && this.food.y === this.snake[0].y) {
             this.score += this.segment;
-            if (this.score % 50 === 0) {
+            this.segmentNumber = this.score; 
+            if (this.segmentNumber >= 50) {
                 this.segment++;
+                this.segmentNumber = 0;
             }
             this.setScore();
             this.successSound.play();
