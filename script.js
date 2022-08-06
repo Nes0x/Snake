@@ -1,4 +1,5 @@
 window.onload = () => {
+    alert("Po każdym zdobyciu 50 punktów zdobędziesz o 1 segment dla węża więcej za jedzenie!")
     const snake = new Snake();
     snake.startGame();
 }
@@ -14,6 +15,7 @@ class Snake {
     score = 0;
     lastScore = 0;
     topScore = 0;
+    segment = 1;
 
     constructor() {
         this.errorSound = new Audio("./sounds/error.mp3");
@@ -112,10 +114,15 @@ class Snake {
 
     foodCollision = () => {
         if (this.food.x === this.snake[0].x && this.food.y === this.snake[0].y) {
-            this.score++;
+            this.score += this.segment;
+            if (this.score % 50 === 0) {
+                this.segment++;
+            }
             this.setScore();
             this.successSound.play();
-            this.snake.push(Object.assign({}, this.snake[this.snake.length - 1]));
+            for (let i = 0; i < this.segment; i++) {
+                this.snake.push(Object.assign({}, this.snake[this.snake.length - 1]));
+            }
             this.randomFood();
         }
     }
