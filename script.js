@@ -9,9 +9,7 @@ class Snake {
     deltaX = 0;
     deltaY = 0;
     food = {
-        x: 0,
-        y: 0,
-        color: "white"
+        x: 0, y: 0, color: "white"
     };
     score = 0;
     lastScore = 0;
@@ -66,7 +64,7 @@ class Snake {
     }
 
     clearMap = () => {
-        this.context.fillStyle = "black";
+        this.context.fillStyle = document.getElementById("map-color").value
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
@@ -75,11 +73,10 @@ class Snake {
         this.context.lineJoin = "bevel"
         this.snake.forEach((value, index) => {
             if (index === 0) {
-                this.context.lineWidth = 6; 
-                this.context.strokeRect(value.x, value.y, this.wallSize, this.wallSize);
-                return;
-            } 
-            this.context.lineWidth = 2;
+                this.context.lineWidth = 6;
+            } else {
+                this.context.lineWidth = 2;
+            }
             this.context.strokeRect(value.x, value.y, this.wallSize, this.wallSize);
         });
     }
@@ -100,7 +97,10 @@ class Snake {
     }
 
     restartGame = () => {
-        this.errorSound.play();
+        if (!(this.deltaX === 0 && this.deltaY === 0)) {
+            this.errorSound.play();
+        }
+        this.setRecords();
         this.score = 0;
         this.setScore();
         this.randomFood();
@@ -120,21 +120,19 @@ class Snake {
         }
     }
 
-    snakeCollision = () => { 
+    snakeCollision = () => {
         this.snake.forEach((value, index) => {
             if (index !== 0) {
-                if (value.x === this.snake[0].x && value.y === this.snake[0].y) { 
-                    this.setRecords();
+                if (value.x === this.snake[0].x && value.y === this.snake[0].y) {
                     this.restartGame();
-                } 
+                }
             }
         });
-    } 
+    }
 
     wallCollision = () => {
         this.snake.forEach(value => {
             if (value.x > this.canvas.width || value.x < 0 || value.y < 0 || value.y > this.canvas.height) {
-                this.setRecords();
                 this.restartGame();
             }
         });
@@ -142,7 +140,7 @@ class Snake {
 
     randomFood = () => {
         const randV = (min, max) => {
-            return Math.floor( (Math.random() * (max-min) + min) / this.wallSize ) * this.wallSize;
+            return Math.floor((Math.random() * (max - min) + min) / this.wallSize) * this.wallSize;
         }
         this.food.color = `rgb(
         ${this.getRandomNumber(255)},
@@ -151,10 +149,10 @@ class Snake {
         let x = randV(this.wallSize, this.canvas.width - this.wallSize);
         let y = randV(this.wallSize, this.canvas.height - this.wallSize);
         this.snake.forEach(value => {
-            while (value.x === x && value.y == y) { 
+            while (value.x === x && value.y === y) {
                 x = randV(this.wallSize, this.canvas.width - this.wallSize);
                 y = randV(this.wallSize, this.canvas.height - this.wallSize);
-            } 
+            }
         });
         this.food.x = x;
         this.food.y = y;
@@ -169,11 +167,11 @@ class Snake {
         this.scoreSpan.textContent = this.score;
     }
 
-    setRecords = () => { 
+    setRecords = () => {
         this.lastScore = this.score;
-        this.lastScoreSpan.textContent = this.lastScore; 
-        if (this.topScore < this.score) { 
-            this.topScore = this.score; 
+        this.lastScoreSpan.textContent = this.lastScore;
+        if (this.topScore < this.score) {
+            this.topScore = this.score;
             this.topScoreSpan.textContent = this.topScore;
         }
     }
