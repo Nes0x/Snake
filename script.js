@@ -118,7 +118,7 @@ class Snake {
     foodCollision = () => {
         if (this.food.x === this.snake[0].x && this.food.y === this.snake[0].y) {
             this.score += this.segment;
-            this.segmentNumber = this.score; 
+            this.segmentNumber += this.segment; 
             if (this.segmentNumber >= 50) {
                 this.segment++;
                 this.segmentNumber = 0;
